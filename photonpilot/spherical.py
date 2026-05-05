@@ -32,7 +32,7 @@ class SphericalDGF:
         self.epsilon_shell = epsilon_shell
         self.n_shell = np.sqrt(self.epsilon_shell)
         
-        # Calculating size paramters
+        # Calculating size parameters
         self.rho=self.R*self.omega/self.c
 
     def get_lambda2(self):
@@ -50,7 +50,7 @@ class SphericalDGF:
         s = 1 + np.real(self.r22p)
         self.lambda2 = 2*dw*e**2*omega**2/(6*np.pi**2*epsilon0*c**3)*s
         
-        # Converting from J/m² to to eV/m²
+        # Converting from J/m² to to eV/nm²
         self.lambda2 *= (6.24E18)/1E18
 
     def get_DGF(self):
@@ -68,7 +68,7 @@ class SphericalDGF:
         rho = self.rho
         n = self.n_shell
 
-        # Calculating the reflection coefficient according to SI Eq. B3
+        # Calculating the reflection coefficient according to SI Eq. B3 (16 in the SI)
         numerator = np.exp(1j*rho)*(1j + rho*(n +1) - 1j*rho**2*n - rho**3*n**2/(n+1))
         denominator = np.sin(rho) - rho*(np.cos(rho) + 1j*n*np.sin(rho)) + 1j*rho**2*n*np.cos(rho) - rho**3*(np.cos(rho) - 1j*n*np.sin(rho))*n**2/(n**2-1)
 
